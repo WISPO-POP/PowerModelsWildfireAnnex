@@ -1,13 +1,4 @@
 
-# import JuMP
-# import JuMP: @variable, @constraint, @NLexpression, @NLconstraint, @objective, @NLobjective, @expression, optimize!, Model
-# import InfrastructureModels; const _IM = InfrastructureModels
-# import PowerModels; const _PM = PowerModels
-# import PowerModels: ids, ref, var, con, sol, nw_id_default
-# import Memento
-# const LOGGER = Memento.getlogger(PowerModels)
-
-
 #### DC Optimal Power Shutoff ####
 
 # This file provides a basic implentation of the DC Optimal Power Shutoff
@@ -16,7 +7,6 @@
 # This file can be run by calling `include("dc-ops.jl")` from the Julia REPL
 
 # Developed by Noah Rhodes(@noahrhodes) and Line Roald (@lroald)
-
 
 ###############################################################################
 # 0. Initialization
@@ -34,7 +24,7 @@ using JuMP
 # ----------------
 powermodels_path = joinpath(dirname(pathof(PowerModelsWildfire)), "..")
 
-# datasets with risk data, available in the PowerModelsWildfire.jl package
+# Datasets with risk data, available in the PowerModelsWildfire.jl package
 file_name = "$(powermodels_path)/test/networks/RTS_GMLC_risk.m"
 # file_name = "$(powermodels_path)/test/networks/case14_risk.m"
 # file_name = "$(powermodels_path)/test/networks/case5_risk_sys1.m"
@@ -42,8 +32,6 @@ file_name = "$(powermodels_path)/test/networks/RTS_GMLC_risk.m"
 
 # load the data file
 data = PowerModels.parse_file(file_name)
-
-
 
 # Modify risk weighting
 # data["risk_weight"] = 0.2
@@ -59,7 +47,6 @@ PowerModels.calc_thermal_limits!(data)
 ref = PowerModels.build_ref(data)
 ref_add_on_off_va_bounds!(ref, data)
 ref = ref[:it][:pm][:nw][0]
-
 # Note: ref contains all the relevant system parameters needed to build the OPS model
 # When we introduce constraints and variable bounds below, we use the parameters in ref.
 
@@ -71,10 +58,6 @@ ref = ref[:it][:pm][:nw][0]
 # Initialize a JuMP Optimization Model
 #-------------------------------------
 model = Model(GLPK.Optimizer)
-
-# set_optimizer_attribute(model, "print_level", 0)
-# note: print_level changes the amount of solver information printed to the terminal
-
 
 # Add Optimization and State Variables
 # ------------------------------------
