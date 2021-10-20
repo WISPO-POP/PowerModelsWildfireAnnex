@@ -2,3 +2,11 @@ name = "PowerModelsWildfireAnnex"
 uuid = "35d05b34-d415-47a9-9985-82cb8531bdb5"
 authors = ["Noah Rhodes <nrhodes@wisc.edu>"]
 version = "0.1.0"
+
+[deps]
+GLPK = "60bf3e95-4087-53dc-ae20-288a0d20c6a6"
+InfrastructureModels = "2030c09a-7f63-5d83-885d-db604e0e9cc0"
+JuMP = "4076af6c-e467-56ae-b986-b466b2749572"
+Memento = "f28f55f0-a522-5efc-85c2-fe41dfb9b2d9"
+PowerModels = "c36e90e8-916a-50a6-bd94-075b64ef4655"
+PowerModelsWildfire = "01a8e460-0890-11ea-3f19-8b8faecc21cc"
